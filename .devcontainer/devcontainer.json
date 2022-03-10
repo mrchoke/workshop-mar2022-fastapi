@@ -1,5 +1,5 @@
 {
-	"name": "Python for ThaiVal",
+	"name": "Python for WorkShop Mar 2022",
 	"dockerComposeFile": ["../../docker-compose.yml","docker-compose.yml"],
   	"service": "api",
   	"workspaceFolder": "/app",
