@@ -4,7 +4,7 @@ Workshop Mar 2022 FastAPI น้องฝึกงาน
 ## Clone
 ```bash
 
-git clone --recurse-submodules https://github.com/mrchoke/workshop-mar2022-fastapi.git
+git clone  https://github.com/mrchoke/workshop-mar2022-fastapi.git
 
 ```
 
@@ -14,6 +14,6 @@ git clone --recurse-submodules https://github.com/mrchoke/workshop-mar2022-fasta
 
 ```bash
 
-git clone --recurse-submodules https://github.com/mrchoke/workshop-mar2022-fastapi.git --config core.autocrlf=input
+git clone  https://github.com/mrchoke/workshop-mar2022-fastapi.git --config core.autocrlf=input
 
 ```
