@@ -1,13 +1,13 @@
 from datetime import datetime
+from re import T
 from typing import Optional
 
 from pydantic import BaseModel
-from sqlalchemy import (BigInteger, Boolean, Column, DateTime, ForeignKey,
-                        Index, Integer, Sequence, Text, Unicode, func,
-                        text)
+from sqlalchemy import (TIMESTAMP, BigInteger, Boolean, Column, DateTime,
+                        FetchedValue, ForeignKey, Index, Integer, Sequence,
+                        Text, Unicode, func, text)
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.declarative import declared_attr
-from sqlalchemy.schema import FetchedValue
 
 from db import Base
 
@@ -34,8 +34,8 @@ class BlogTable(Base):
     blog = Column(Text, nullable=False)
     disabled = Column(Boolean, nullable=True, server_default=text("False"))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), default=func.now(), server_default=func.now(),
-                        server_onupdate=FetchedValue(), onupdate=func.now())
+    updated_at = Column(TIMESTAMP(timezone=True), default=func.now(), server_default=func.now(),
+                        server_onupdate=FetchedValue(for_update=True), onupdate=func.now())
 
 
 class BlogClickTable(Base):
