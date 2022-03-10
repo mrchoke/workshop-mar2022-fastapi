@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  api:
+    build: 
+      context: ./workshop-mar2022-fastapi/.devcontainer
+      dockerfile: Dockerfile.dev
+    hostname: workshop-mar2022-fastapi/
+    volumes:
+      - ./workshop-mar2022-fastapi:/app:cached
+    init: true
+    command:  ['sleep', 'infinity']
