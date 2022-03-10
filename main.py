@@ -3,9 +3,11 @@ import sys
 
 import uvicorn
 from fastapi import FastAPI
-from settings import cfg
 
+from db import database, init_db
+from settings import cfg
 version = f"{sys.version_info.major}.{sys.version_info.minor}"
+
 
 app = FastAPI(
     title="Workshop FastAPI",
@@ -31,6 +33,18 @@ if cfg.MODE == "dev":
 async def read_root():
     message = f"Hello world! From FastAPI . Using Python {version}"
     return {"message": message}
+
+
+@app.on_event("startup")
+async def startup():
+    await database.connect()
+    init_db()
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    await database.disconnect()
+
 
 if __name__ == "__main__":
 
