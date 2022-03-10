@@ -1,0 +1,7 @@
+MODE=dev
+BASE_URL=http://localhost:18080
+DB_NAME=workshop
+DB_USERNAME=db
+DB_PASSWORD=111111
+DB_HOST=pg
+DB_PORT=5432
