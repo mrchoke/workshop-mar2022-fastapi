@@ -1,11 +1,15 @@
 import os
 import sys
 
+import blog_star
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 
+import blog
+import blog_click
 from db import database, init_db
 from settings import cfg
+
 version = f"{sys.version_info.major}.{sys.version_info.minor}"
 
 
@@ -34,6 +38,28 @@ async def read_root():
     message = f"Hello world! From FastAPI . Using Python {version}"
     return {"message": message}
 
+
+app.include_router(
+    blog.router,
+    prefix="/blog",
+    tags=["Blog"],
+    responses={status.HTTP_404_NOT_FOUND: {"description": "Blog Not Found"}}
+)
+
+app.include_router(
+    blog_click.router,
+    prefix="/blog/click",
+    tags=["Blog Click"],
+    responses={status.HTTP_404_NOT_FOUND: {"description": "Not Found"}}
+)
+
+
+app.include_router(
+    blog_star.router,
+    prefix="/blog/star",
+    tags=["Blog Star"],
+    responses={status.HTTP_404_NOT_FOUND: {"description": "Not Found"}}
+)
 
 @app.on_event("startup")
 async def startup():

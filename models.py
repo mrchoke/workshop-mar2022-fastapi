@@ -2,7 +2,7 @@ from datetime import datetime
 from re import T
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Json
 from sqlalchemy import (TIMESTAMP, BigInteger, Boolean, Column, DateTime,
                         FetchedValue, ForeignKey, Index, Integer, Sequence,
                         Text, Unicode, func, text)
@@ -65,6 +65,7 @@ class BlogStarTable(Base):
 
 class BlogBase(BaseModel):
     title: str
+    slug: Optional[str] = None
     tags: Optional[list] = []
     blog: str
     disabled: Optional[bool] = False
@@ -80,6 +81,7 @@ class BlogCreate(BlogBase):
 class BlogUpdate(BaseModel):
     id: int
     title: Optional[str] = None
+    slug: Optional[str] = None
     tags: Optional[list] = None
     blog: Optional[str] = None
     disabled: Optional[bool] = None
@@ -87,6 +89,7 @@ class BlogUpdate(BaseModel):
 
 class Blog(BlogBase):
     id: int
+    tags: Json[list]
     created_at: datetime = None
     updated_at: datetime = None
 
